@@ -13,11 +13,14 @@ export default function CustomFormExample() {
   lastName: "",
  });
 
+ const [errors, setErrors] = useState({});
+
  const validateProperty = (name, value) => {
   // create object with only name and value
   // create joi object with this only name and the validation
   // do the validation
   // returm the error.detalis[0]. message Or null
+  //
  };
 
  const handleChange = (event) => {
