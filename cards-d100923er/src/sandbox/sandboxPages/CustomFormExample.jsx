@@ -1,47 +1,60 @@
-import { Box, Button, Container, Paper, TextField } from "@mui/material";
+import { Container } from "@mui/material";
 import Joi from "joi";
 import useForm from "../../forms/hooks/useForm";
 import CustomForm from "../../forms/components/CustomForm";
+import ROUTES from "../../routes/routesModel";
+import CustomInput from "../../forms/components/CustomInput";
 
-const schema = Joi.object({
- firstName: Joi.string().min(2),
- lastName: Joi.string().min(2).max(10),
-});
+const schema = {
+  first: Joi.string().min(2),
+  last: Joi.string().min(2).max(10),
+};
 
 const initialForm = {
- first: "",
- last: "",
+  first: "",
+  last: "",
 };
 
 const handleSubmit = (data) => {
- console.log(data);
+  console.log(data);
 };
 
 export default function CustomFormExample() {
- const { errors, data, handleChange, handleReset, validateForm, onSubmit } =
-  useForm(initialForm, schema, handleSubmit);
+  const { data, errors, handleChange, onSubmit, handleReset, validateForm } =
+    useForm(initialForm, schema, handleSubmit);
 
- return (
-  <Container sx={{ mt: 10 }}>
-   <Box component={Paper}>
-    <CustomForm
-     label="first name"
-     value={data.first}
-     name="first"
-     onChange={handleChange}
-     helperText={errors.first}
-     error={Boolean(errors.first)}
-    />
-    <CustomForm
-     label="last name"
-     value={data.last}
-     name="last"
-     onChange={handleChange}
-     helperText={errors.last}
-     error={Boolean(errors.last)}
-    />
-    <Button onClick={handleSubmit}>sWWbmit</Button>
-   </Box>
-  </Container>
- );
+  return (
+    <Container
+      sx={{
+        mt: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CustomForm
+        title="Test Form"
+        onSubmit={onSubmit}
+        onReset={handleReset}
+        styles={{ maxWidth: "450px" }}
+        validateForm={validateForm}
+        to={ROUTES.SANDBOX}
+      >
+        <CustomInput
+          label="first name"
+          name="first"
+          data={data}
+          error={errors.first}
+          onChange={handleChange}
+        />
+        <CustomInput
+          label="last name"
+          name="last"
+          data={data}
+          error={errors.last}
+          onChange={handleChange}
+        />
+      </CustomForm>
+    </Container>
+  );
 }
