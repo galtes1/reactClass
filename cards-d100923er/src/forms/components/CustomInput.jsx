@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 
 import Grid from "@mui/material/Grid";
+import algoMethods from "../utils/algoMethods";
 
 const CustomInput = ({
  variant = "outlined",
@@ -14,6 +15,7 @@ const CustomInput = ({
  onChange,
  ...rest
 }) => {
+ const { makeFirstLetterCapital } = algoMethods();
  return (
   <Grid item xs={12} {...rest}>
    <TextField
@@ -22,7 +24,7 @@ const CustomInput = ({
     type={type}
     id={name}
     name={name}
-    value={data[name] ? data[name] : ""}
+    value={makeFirstLetterCapital(data[name] ? data[name] : "")}
     required={required}
     helperText={error}
     error={Boolean(error)}
