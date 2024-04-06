@@ -4,7 +4,6 @@ import useForm from "../../forms/hooks/useForm";
 import CustomForm from "../../forms/components/CustomForm";
 import ROUTES from "../../routes/routesModel";
 import CustomInput from "../../forms/components/CustomInput";
-import algoMethods from "../../forms/utils/algoMethods";
 
 const schema = {
  first: Joi.string().min(2),
@@ -24,7 +23,6 @@ export default function CustomFormExample() {
  const { data, errors, handleChange, onSubmit, handleReset, validateForm } =
   useForm(initialForm, schema, handleSubmit);
 
- const { makeFirstLetterCapital } = algoMethods();
  return (
   <Container
    sx={{
