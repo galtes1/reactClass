@@ -13,6 +13,7 @@ export default function CustomLeftNavBar() {
         <CustomLogo />
         <CustomNavItem to={ROUTES.ABOUT} label={"about"} />
         <CustomNavItem to={ROUTES.SANDBOX} label={"sandbox"} />
+        <CustomNavItem to={ROUTES.FORM} label={"Form try"} />
       </Box>
     </>
   );

@@ -14,6 +14,7 @@ const ROUTES = {
   SANDBOX: "/sandbox",
   COUNTER: "/counter",
   SPINNER: "/spinner",
+  FORM: "/form-main",
 };
 
 export default ROUTES;

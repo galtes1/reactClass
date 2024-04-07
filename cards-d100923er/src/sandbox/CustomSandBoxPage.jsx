@@ -13,6 +13,7 @@ export default function CustomSandBoxPage() {
           <CustomNavItem to="countries" label="Counteries" />
           <CustomNavItem to="spinner" label="Spinner" />
           <CustomNavItem to="form" label="form example" />
+          <CustomNavItem to="optimization" label="optimization" />
         </Toolbar>
       </AppBar>
 
