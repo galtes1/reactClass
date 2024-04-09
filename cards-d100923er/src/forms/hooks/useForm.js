@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Joi from "joi";
 
 export default function useForm(initialForm, schema, handleSubmit) {
   const [data, setData] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
-  const validateProperty = (name, value) => {
-    const obj = { [name]: value };
-    const generateSchema = Joi.object({ [name]: schema[name] });
-    const { error } = generateSchema.validate(obj);
-    return error ? error.details[0].message : null;
-  };
+  const validateProperty = useCallback(
+    (name, value) => {
+      const obj = { [name]: value };
+      const generateSchema = Joi.object({ [name]: schema[name] });
+      const { error } = generateSchema.validate(obj);
+      return error ? error.details[0].message : null;
+    },
+    [schema]
+  );
 
   const handleChange = (event) => {
     const name = event.target.name;

@@ -63,14 +63,15 @@ const handleSubmit = (data) => {
 };
 export default function CustomSignupPage() {
   const {
-    errors,
     data,
+    errors,
     handleChange,
     handleReset,
     validateForm,
     onSubmit,
     handleChangeCheckBox,
   } = useForm(initialSignupForm, signupSchema, handleSubmit);
+  console.log(data);
   return (
     <Container
       sx={{

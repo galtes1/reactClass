@@ -16,7 +16,7 @@ export default function CustomCardsPage() {
 
   useEffect(() => {
     getAllCards();
-  }, []);
+  }, [getAllCards]);
 
   return (
     <div>

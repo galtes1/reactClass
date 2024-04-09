@@ -24,8 +24,7 @@ export default function Router() {
       <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
       <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
       <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
-      <Route path={ROUTES.FORM} element={<CustomFormMain />} />
-
+      <Route path={ROUTES.FORM} element={<CustomFormMain />}></Route>
       <Route
         path={ROUTES.CARD_INFO + "/:id"}
         element={<CustomCardDetailsPage />}

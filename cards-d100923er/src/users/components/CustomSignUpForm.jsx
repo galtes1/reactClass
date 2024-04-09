@@ -1,5 +1,4 @@
 import React from "react";
-
 import CustomForm from "../../forms/components/CustomForm";
 import ROUTES from "../../routes/routesModel";
 import CustomInput from "../../forms/components/CustomInput";
@@ -13,7 +12,7 @@ export default function CustomSignUpForm({
   errors,
   data,
   onInputChange,
-  setData,
+  handleChangeCheckBox,
 }) {
   return (
     <CustomForm
@@ -147,10 +146,10 @@ export default function CustomSignUpForm({
       />
       <Grid item>
         <FormControlLabel
-          onChange={onInputChange}
+          onChange={handleChangeCheckBox}
           name="isBusiness"
-          label="business?"
           control={<Checkbox value={data.isBusiness} color="primary" />}
+          label="business?"
         />
       </Grid>
     </CustomForm>

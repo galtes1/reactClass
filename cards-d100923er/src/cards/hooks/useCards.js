@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
@@ -7,8 +7,7 @@ export default function useCards() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
 
-  // פונקציה ראשונה
-  const getAllCards = async () => {
+  const getAllCards = useCallback(async () => {
     try {
       setError(null);
       setIsLoading(true);
@@ -21,10 +20,9 @@ export default function useCards() {
       setError(err.message);
     }
     setIsLoading(false);
-  };
+  }, []);
 
-  // פונקציה שניה
-  const getCardById = async (id) => {
+  const getCardById = useCallback(async (id) => {
     try {
       setError(null);
       setIsLoading(true);
@@ -37,15 +35,15 @@ export default function useCards() {
       setError(err.message);
     }
     setIsLoading(false);
-  };
+  }, []);
 
-  const handleCardDelete = (id) => {
+  const handleCardDelete = useCallback((id) => {
     console.log("you deleted card no" + id);
-  };
+  }, []);
 
-  const handleCardLike = (id) => {
+  const handleCardLike = useCallback((id) => {
     console.log("you liked card no" + id);
-  };
+  }, []);
   return {
     card,
     cards,
