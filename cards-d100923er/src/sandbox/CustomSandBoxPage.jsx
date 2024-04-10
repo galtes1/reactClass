@@ -4,22 +4,23 @@ import { Outlet } from "react-router-dom";
 import CustomNavItem from "../routes/components/CustomNavItem";
 
 export default function CustomSandBoxPage() {
-  return (
-    <div>
-      <AppBar position="sticky" color="secondary">
-        <Toolbar sx={{ color: "black" }}>
-          <CustomNavItem to="counter" label="Counter" />
-          <CustomNavItem to="lifeCycle" label="Life cycle" />
-          <CustomNavItem to="countries" label="Counteries" />
-          <CustomNavItem to="spinner" label="Spinner" />
-          <CustomNavItem to="form" label="form example" />
-          <CustomNavItem to="optimization" label="optimization" />
-        </Toolbar>
-      </AppBar>
+ return (
+  <div>
+   <AppBar position="sticky" color="secondary">
+    <Toolbar sx={{ color: "black" }}>
+     <CustomNavItem to="counter" label="Counter" />
+     <CustomNavItem to="lifeCycle" label="Life cycle" />
+     <CustomNavItem to="countries" label="Counteries" />
+     <CustomNavItem to="spinner" label="Spinner" />
+     <CustomNavItem to="form" label="form example" />
+     <CustomNavItem to="optimization" label="optimization" />
+     <CustomNavItem to="context" label="context" />
+    </Toolbar>
+   </AppBar>
 
-      <Container>
-        <Outlet />
-      </Container>
-    </div>
-  );
+   <Container>
+    <Outlet />
+   </Container>
+  </div>
+ );
 }
