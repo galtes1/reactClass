@@ -10,6 +10,7 @@ export default function CardActionBar({
  _id,
  handleCardDelete,
  handleCardLike,
+ userId,
 }) {
  const user = useUsers();
  console.log(user);
@@ -18,14 +19,16 @@ export default function CardActionBar({
  };
  return (
   <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
-   <Box>
-    <IconButton onClick={() => handleCardDelete(_id)}>
-     <DeleteIcon />
-    </IconButton>
-    <IconButton onClick={() => handleCardEdit(_id)}>
-     <ModeEditIcon />
-    </IconButton>
-   </Box>
+   {user.isAdmin || user._id === userId ? (
+    <Box>
+     <IconButton onClick={() => handleCardDelete(_id)}>
+      <DeleteIcon />
+     </IconButton>
+     <IconButton onClick={() => handleCardEdit(_id)}>
+      <ModeEditIcon />
+     </IconButton>
+    </Box>
+   ) : null}
    <Box>
     <IconButton>
      <CallIcon />
