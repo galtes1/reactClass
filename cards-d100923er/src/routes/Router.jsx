@@ -11,7 +11,6 @@ import CustomLifeCycle from "../sandbox/sandboxPages/CustomLifeCycle";
 import CustomCountries from "../sandbox/sandboxPages/CustomCountries";
 import CustomSpinner from "../components/CustomSpinner";
 import CustomFormExample from "../sandbox/sandboxPages/CustomFormExample";
-import CustomFormMain from "../forms/pages/CustomFormMain";
 import CustomSignupPage from "../users/pages/CustomSignupPage";
 import CustomLoginPage from "../users/pages/CustomLoginPage";
 import CustomParentComponent from "../sandbox/optimozation/CustomParentComponent";
@@ -25,10 +24,7 @@ export default function Router() {
    <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
    <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
    <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
-   <Route path={ROUTES.FORM} element={<CustomFormMain />}>
-    <Route path="logIn" element={<CustomLoginPage />} />
-    <Route path="signUp" element={<CustomSignupPage />} />
-   </Route>
+
    <Route
     path={ROUTES.CARD_INFO + "/:id"}
     element={<CustomCardDetailsPage />}

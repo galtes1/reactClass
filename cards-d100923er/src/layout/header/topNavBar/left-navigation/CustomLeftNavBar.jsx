@@ -6,15 +6,14 @@ import CustomNavItem from "../../../../routes/components/CustomNavItem";
 import ROUTES from "../../../../routes/routesModel";
 
 export default function CustomLeftNavBar() {
-  return (
-    <>
-      <Box>
-        <CustomLogoIcon />
-        <CustomLogo />
-        <CustomNavItem to={ROUTES.ABOUT} label={"about"} />
-        <CustomNavItem to={ROUTES.SANDBOX} label={"sandbox"} />
-        <CustomNavItem to={ROUTES.FORM} label={"Form try"} />
-      </Box>
-    </>
-  );
+ return (
+  <>
+   <Box>
+    <CustomLogoIcon />
+    <CustomLogo />
+    <CustomNavItem to={ROUTES.ABOUT} label={"about"} />
+    <CustomNavItem to={ROUTES.SANDBOX} label={"sandbox"} />
+   </Box>
+  </>
+ );
 }

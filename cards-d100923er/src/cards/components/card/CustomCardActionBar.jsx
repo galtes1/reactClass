@@ -12,14 +12,16 @@ export default function CardActionBar({
  handleCardLike,
  userId,
 }) {
- const user = useUsers();
+ const { user } = useUsers();
  console.log(user);
+
  const handleCardEdit = (_id) => {
   console.log("lets go and edit card no " + _id);
  };
+
  return (
   <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
-   {user.isAdmin || user._id === userId ? (
+   {user && (user.isAdmin || user._id === userId) ? (
     <Box>
      <IconButton onClick={() => handleCardDelete(_id)}>
       <DeleteIcon />
