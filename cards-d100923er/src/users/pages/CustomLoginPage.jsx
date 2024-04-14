@@ -7,7 +7,7 @@ import ROUTES from "../../routes/routesModel";
 import CustomPageHeader from "../../components/CustomPageHeader";
 import CustomForm from "../../forms/components/CustomForm";
 import CustomInput from "../../forms/components/CustomInput";
-import { useUsers } from "../providers/UserProvider";
+import { useUser } from "../providers/UserProvider";
 import { Navigate } from "react-router-dom";
 
 const handleSubmit = (x) => {
@@ -18,7 +18,7 @@ export default function LoginPage() {
  const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
   useForm(initialLoginForm, loginSchema, handleSubmit);
 
- const { user } = useUsers();
+ const { user } = useUser();
  if (user) {
   return <Navigate to={ROUTES.ROOT} replace />;
  }

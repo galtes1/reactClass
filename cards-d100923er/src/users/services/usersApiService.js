@@ -1,12 +1,29 @@
-export default function usersApiService() {
-  const login = () => {
-    return null;
-  };
-  const signup = (user) => {
-    return null;
-  };
-  const getUserData = (id) => {
-    return null;
-  };
-  return { login, signup, getUserData };
-}
+import axios from "axios";
+const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/";
+
+export const login = async (userLogin) => {
+ try {
+  const response = await axios.post(apiUrl + "/login", userLogin);
+  const data = response.data;
+  return data;
+ } catch (error) {
+  throw new Error(error.message);
+ }
+};
+
+export const signup = async (normalizedUser) => {
+ try {
+  const { data } = await axios.post(apiUrl, normalizedUser);
+  return data;
+ } catch (error) {
+  throw new Error(error.message);
+ }
+};
+export const getUserData = async (id) => {
+ try {
+  const { data } = await axios.post(`${apiUrl}/${id}`);
+  return data;
+ } catch (error) {
+  throw new Error(error.message);
+ }
+};

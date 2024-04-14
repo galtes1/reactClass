@@ -4,7 +4,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
-import { useUsers } from "../../../users/providers/UserProvider";
+import { useUser } from "../../../users/providers/UserProvider";
 
 export default function CardActionBar({
  _id,
@@ -12,7 +12,7 @@ export default function CardActionBar({
  handleCardLike,
  userId,
 }) {
- const { user } = useUsers();
+ const { user } = useUser();
  console.log(user);
 
  const handleCardEdit = (_id) => {

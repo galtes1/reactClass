@@ -3,7 +3,7 @@ import useForm from "../../forms/hooks/useForm";
 import { Container } from "@mui/material";
 import CustomSignUpForm from "../components/CustomSignUpForm";
 import Joi from "joi";
-import { useUsers } from "../providers/UserProvider";
+import { useUser } from "../providers/UserProvider";
 import { Navigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 
@@ -75,7 +75,7 @@ export default function CustomSignupPage() {
   handleChangeCheckBox,
  } = useForm(initialSignupForm, signupSchema, handleSubmit);
  console.log(data);
- const { user } = useUsers();
+ const { user } = useUser();
 
  if (user) {
   return <Navigate to={ROUTES.ROOT} replace={true} />;
