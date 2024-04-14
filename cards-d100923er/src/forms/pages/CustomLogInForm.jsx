@@ -1,5 +1,5 @@
-import { Container } from "@mui/material";
-import React from "react";
+import { Container, Button } from "@mui/material";
+import { React } from "react";
 import CustomForm from "../../forms/components/CustomForm";
 import CustomInput from "../../forms/components/CustomInput";
 import useForm from "../../forms/hooks/useForm";
@@ -9,7 +9,6 @@ const initialLoginForm = {
   email: "",
   password: "",
 };
-
 const loginSchema = {
   email: Joi.string()
     .ruleset.regex(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/)
@@ -40,6 +39,7 @@ export default function CustomLogInForm() {
     validateForm,
     handleChangeCheckBox,
   } = useForm(initialLoginForm, loginSchema, handleSubmit);
+
   return (
     <Container
       sx={{
@@ -57,7 +57,7 @@ export default function CustomLogInForm() {
         validateForm={validateForm}
       >
         <CustomInput
-          label="email"
+          label="email2"
           name="email"
           data={data}
           error={errors.email}
@@ -72,6 +72,7 @@ export default function CustomLogInForm() {
           onChange={handleChangeCheckBox}
         />
       </CustomForm>
+      <Button variant="containted">log out</Button>
     </Container>
   );
 }
