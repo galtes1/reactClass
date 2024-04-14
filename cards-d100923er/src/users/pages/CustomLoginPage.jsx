@@ -20,7 +20,10 @@ export default function LoginPage() {
 
   const { user } = UserProvider;
   if (user) {
-    return <Navigate to={ROUTES.SIGNUP} replace={null} />;
+    return <Navigate to={ROUTES.ROOT} replace={false} />;
+  }
+  if (!user) {
+    return <Navigate to={ROUTES.SIGNUP} replace={true} />;
   }
   return (
     <Container>
