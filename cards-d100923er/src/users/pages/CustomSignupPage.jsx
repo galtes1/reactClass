@@ -6,6 +6,7 @@ import Joi from "joi";
 import { useUser } from "../providers/UserProvider";
 import { Navigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
+import useUsers from "../hooks/useUsers";
 
 const initialSignupForm = {
  first: "",
@@ -61,10 +62,9 @@ const signupSchema = {
  zip: Joi.number(),
  isBusiness: Joi.boolean().required(),
 };
-const handleSubmit = (data) => {
- console.log(data);
-};
+
 export default function CustomSignupPage() {
+ const { handleSignup } = useUsers;
  const {
   data,
   errors,
@@ -73,7 +73,7 @@ export default function CustomSignupPage() {
   validateForm,
   onSubmit,
   handleChangeCheckBox,
- } = useForm(initialSignupForm, signupSchema, handleSubmit);
+ } = useForm(initialSignupForm, signupSchema, handleSignup);
  console.log(data);
  const { user } = useUser();
 
