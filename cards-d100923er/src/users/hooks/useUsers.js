@@ -7,7 +7,7 @@ import {
  setTokenInLocalStorage,
 } from "../services/localStorageService";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../../../routes/routesModel";
+import ROUTES from "../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 
 export default function useUsers() {
@@ -40,6 +40,7 @@ export default function useUsers() {
  const handleSignup = useCallback(
   async (userFromCLient) => {
    setIsLoading(true);
+   //console.log(userFromCLient);
    try {
     const normalizedUser = normalizeUser(userFromCLient);
     await signup(normalizedUser);
@@ -49,11 +50,12 @@ export default function useUsers() {
     });
    } catch (error) {
     setError(error.message);
+    console.log(error);
    }
    setIsLoading(false);
   },
   [handleLogin]
  );
 
- return { handleLogin, handleLogout, handleSignup, user, error, isLoading };
+ return { user, error, isLoading, handleLogin, handleLogout, handleSignup };
 }

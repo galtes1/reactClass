@@ -9,14 +9,13 @@ import CustomForm from "../../forms/components/CustomForm";
 import CustomInput from "../../forms/components/CustomInput";
 import { useUser } from "../providers/UserProvider";
 import { Navigate } from "react-router-dom";
-
-const handleSubmit = (x) => {
- console.log(x);
-};
+import useUsers from "../hooks/useUsers";
 
 export default function LoginPage() {
+ const { handleLogin } = useUsers();
+
  const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-  useForm(initialLoginForm, loginSchema, handleSubmit);
+  useForm(initialLoginForm, loginSchema, handleLogin);
 
  const { user } = useUser();
  if (user) {

@@ -1,7 +1,7 @@
-export default function normalizeUser({ user }) {
+export default function normalizeUser(user) {
  return {
   name: {
-   first: user.fisrt,
+   first: user.first,
    middle: user.middle,
    last: user.last,
   },

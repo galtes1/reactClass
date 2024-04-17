@@ -64,7 +64,7 @@ const signupSchema = {
 };
 
 export default function CustomSignupPage() {
- const { handleSignup } = useUsers;
+ const { handleSignup } = useUsers();
  const {
   data,
   errors,
@@ -74,7 +74,6 @@ export default function CustomSignupPage() {
   onSubmit,
   handleChangeCheckBox,
  } = useForm(initialSignupForm, signupSchema, handleSignup);
- console.log(data);
  const { user } = useUser();
 
  if (user) {
