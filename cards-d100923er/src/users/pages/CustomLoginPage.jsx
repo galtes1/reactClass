@@ -8,60 +8,71 @@ import CustomPageHeader from "../../components/CustomPageHeader";
 import CustomForm from "../../forms/components/CustomForm";
 import CustomInput from "../../forms/components/CustomInput";
 import { useUser } from "../providers/UserProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
+import { Button, Grid } from "@mui/material";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 export default function LoginPage() {
- const { handleLogin } = useUsers();
+  const { handleLogin } = useUsers();
 
- const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-  useForm(initialLoginForm, loginSchema, handleLogin);
+  const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
+    useForm(initialLoginForm, loginSchema, handleLogin);
 
- const { user } = useUser();
- if (user) {
-  return <Navigate to={ROUTES.ROOT} replace />;
- }
+  const { user } = useUser();
+  if (user) return <Navigate to={ROUTES.ROOT} replace />;
 
- return (
-  <Container>
-   <CustomPageHeader
-    title="Welcome to Login page"
-    subtitle="here you can log in"
-   />
-   <Container
-    sx={{
-     paddingTop: 8,
-     display: "flex",
-     justifyContent: "center",
-     alignItems: "center",
-    }}
-   >
-    <CustomForm
-     title="login"
-     styles={{ maxWidth: "450px" }}
-     to={ROUTES.ROOT}
-     onSubmit={onSubmit}
-     onReset={handleReset}
-     validateForm={validateForm}
-    >
-     <CustomInput
-      label="email"
-      name="email"
-      type="email"
-      error={errors.email}
-      onChange={handleChange}
-      data={data}
-     />
-     <CustomInput
-      label="password"
-      name="password"
-      type="password"
-      error={errors.password}
-      onChange={handleChange}
-      data={data}
-     />
-    </CustomForm>
-   </Container>
-  </Container>
- );
+  return (
+    <Container>
+      <CustomPageHeader
+        title="Welcome to Login page"
+        subtitle="here you can log in"
+      />
+      <Container
+        sx={{
+          paddingTop: 8,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CustomForm
+          title="login"
+          styles={{ maxWidth: "450px" }}
+          to={ROUTES.ROOT}
+          onSubmit={onSubmit}
+          onReset={handleReset}
+          validateForm={validateForm}
+        >
+          <CustomInput
+            label="email"
+            name="email"
+            type="email"
+            error={errors.email}
+            onChange={handleChange}
+            data={data}
+          />
+          <CustomInput
+            label="password"
+            name="password"
+            type="password"
+            error={errors.password}
+            onChange={handleChange}
+            data={data}
+          />
+          <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              component={Link}
+              to={ROUTES.SIGNUP}
+              startIcon={<AccountBoxIcon />}
+              sx={{ width: "100%" }}
+            >
+              Sign Up
+            </Button>
+          </Grid>
+        </CustomForm>
+      </Container>
+    </Container>
+  );
 }

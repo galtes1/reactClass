@@ -57,7 +57,7 @@ export default function CustomLogInForm() {
         validateForm={validateForm}
       >
         <CustomInput
-          label="email2"
+          label="email"
           name="email"
           data={data}
           error={errors.email}
