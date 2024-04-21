@@ -15,6 +15,7 @@ import CustomSignupPage from "../users/pages/CustomSignupPage";
 import CustomLoginPage from "../users/pages/CustomLoginPage";
 import CustomParentComponent from "../sandbox/optimozation/CustomParentComponent";
 import ParentComponentPage from "../sandbox/context/ParentComponentPage";
+import CustomAddCardPage from "../cards/pages/CustomAddCardPage";
 
 export default function Router() {
  return (
@@ -24,6 +25,7 @@ export default function Router() {
    <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
    <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
    <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
+   <Route path={ROUTES.CREATE_CARD} element={<CustomAddCardPage />} />
 
    <Route
     path={ROUTES.CARD_INFO + "/:id"}
