@@ -6,10 +6,13 @@ import { Box, IconButton } from "@mui/material";
 import { useTheme } from "../../../../providers/CustomThemeProvider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import CustomMoreMenu from "./CustomMoreMenu";
 
 export default function CustomRightNavBar() {
+
   const { user } = useUser();
   const { isDark, toggleDarkMode } = useTheme();
+
   return (
     <>
       <Box
@@ -24,6 +27,7 @@ export default function CustomRightNavBar() {
         {user && <CustomLogged />}
         {!user && <CustomNotLogged />}
       </Box>
+      <CustomMoreMenu/>
     </>
   );
 }

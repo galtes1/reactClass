@@ -7,7 +7,6 @@ import { MenuProvider } from "./menu/menuProvider";
 export default function CustomNavBar() {
  return (
   <MenuProvider>
-   {" "}
    <AppBar sx={{ color: "GrayText" }} position="sticky" elevation={10}>
     <Toolbar
      sx={{
