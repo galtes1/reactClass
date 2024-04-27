@@ -1,5 +1,10 @@
 import { useCallback, useState } from "react";
-import { editCard, getCard, getCards } from "../services/cardsApiService";
+import {
+ createCard,
+ editCard,
+ getCard,
+ getCards,
+} from "../services/cardsApiService";
 import { useSnack } from "../../providers/SnackbarProvider";
 import ROUTES from "../../routes/routesModel";
 import { useNavigate } from "react-router-dom";
@@ -20,12 +25,12 @@ export default function useCards() {
    setIsLoading(true);
    const data = await getCards();
    setCards(data);
-   setSnack("success");
+   setSnack("success", "displaying all cards");
   } catch (err) {
    setError(err.message);
   }
   setIsLoading(false);
- }, []);
+ }, [setSnack]);
 
  const getCardById = useCallback(async (id) => {
   try {
@@ -39,18 +44,14 @@ export default function useCards() {
   setIsLoading(false);
  }, []);
 
- const handleCardDelete = useCallback((id) => {
-  console.log("you deleted card no" + id);
- }, []);
-
- const handleCardLike = useCallback((id) => {
-  console.log("you liked card no" + id);
- }, []);
-
  const handleCardCreate = useCallback(
   async (cardFromClient) => {
+   setError(null);
+   setIsLoading(true);
+
    try {
-    setError(null);
+    const card = await createCard(normalizeCard(cardFromClient));
+    setCard(card);
     setSnack("success", "A new card created");
     setTimeout(() => {
      navigate(ROUTES.ROOT);
@@ -63,13 +64,26 @@ export default function useCards() {
   [setSnack, navigate]
  );
 
- const handleUpdateCard = useCallback(async (cardId, cardFromClient) => {
-  setIsLoading(true);
-  try {
-   const card = await editCard(cardId, normalizeCard(cardFromClient));
-  } catch (error) {}
+ const handleUpdateCard = useCallback(
+  async (cardId, cardFromClient) => {
+   setIsLoading(true);
+   try {
+    const card = await editCard(cardId, normalizeCard(cardFromClient));
+    setCard(card);
+    setSnack("success", `Business Card # ${cardId} Updated Successfully`);
+    navigate(ROUTES.ROOT);
+   } catch (error) {}
+  },
+  [setSnack, navigate]
+ );
+
+ const handleCardDelete = useCallback((id) => {
+  console.log("you deleted card no" + id);
  }, []);
 
+ const handleCardLike = useCallback((id) => {
+  console.log("you liked card no" + id);
+ }, []);
  return {
   card,
   cards,
@@ -80,5 +94,6 @@ export default function useCards() {
   handleCardDelete,
   handleCardLike,
   handleCardCreate,
+  handleUpdateCard,
  };
 }

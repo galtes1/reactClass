@@ -5,16 +5,16 @@ import Avatar from "@mui/material/Avatar";
 import { useMenu } from "../menu/menuProvider";
 
 const CustomLogged = () => {
-    const setOpen = useMenu();
+ const setOpen = useMenu();
  return (
   <Tooltip title="open settings">
-    <IconButton
-    sx={{p:0, display:"inline-flex", marginLeft:2}}
-    onClick={()=>setOpen(true)}>
-<Avatar alt="avatar" src="../../../../../public/assets/images/avatarUser.png"/>
-    </IconButton>
+   <IconButton
+    sx={{ p: 0, display: "inline-flex", marginLeft: 2 }}
+    onClick={() => setOpen(true)}
+   >
+    <Avatar alt="avatar" src="/assets/images/avatarUser.png" />
+   </IconButton>
   </Tooltip>
-
  );
 };
 
