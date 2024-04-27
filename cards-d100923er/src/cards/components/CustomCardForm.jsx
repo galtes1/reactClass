@@ -20,8 +20,8 @@ const CustomCardForm = ({
    errors={errors}
    validateForm={validateForm}
    styles={{ maxWidth: "800px" }}
-   title={title}
    to={ROUTES.ROOT}
+   title={title}
   >
    <CustomInput
     name="title"

@@ -12,7 +12,7 @@ import { Container } from "@mui/material";
 export default function CustomAddCardPage() {
  const { user } = useUser();
  const { handleCreateCard } = useCards();
- const { data, errors, handleChange, handleReset, onSubmit, validateForm } =
+ const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
   useForm(initialCardForm, cardSchema, handleCreateCard);
 
  if (!user) return <Navigate to={ROUTES.CARDS} />;

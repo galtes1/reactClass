@@ -4,35 +4,36 @@ import Grid from "@mui/material/Grid";
 import algoMethods from "../utils/algoMethods";
 
 const CustomInput = ({
-  variant = "outlined",
-  type = "text",
-  name,
-  data,
-  label,
-  required = true,
-  error,
-  onChange,
-  ...rest
+ variant = "outlined",
+ type = "text",
+ name,
+ data,
+ label,
+ required = true,
+ error,
+ onChange,
+ ...rest
 }) => {
-  const { makeFirstLetterCapital } = algoMethods();
-  return (
-    <Grid item xs={12} {...rest}>
-      <TextField
-        variant={variant}
-        label={makeFirstLetterCapital(label)}
-        type={type}
-        id={name}
-        name={name}
-        value={data[name] ? data[name] : ""}
-        required={required}
-        helperText={error}
-        error={Boolean(error)}
-        onChange={onChange}
-        fullWidth
-        autoComplete="off"
-      />
-    </Grid>
-  );
+ const { makeFirstLetterCapital } = algoMethods();
+
+ return (
+  <Grid item xs={12} {...rest}>
+   <TextField
+    variant={variant}
+    label={makeFirstLetterCapital(label)}
+    type={type}
+    id={name}
+    name={name}
+    value={data[name] ? data[name] : ""}
+    required={required}
+    helperText={error}
+    error={Boolean(error)}
+    onChange={onChange}
+    fullWidth
+    autoComplete="off"
+   />
+  </Grid>
+ );
 };
 
 export default CustomInput;
