@@ -92,6 +92,15 @@ const CustomCardForm = ({
     sm={6}
     required={false}
    />
+
+   <CustomInput
+    name="country"
+    label="country"
+    error={errors.country}
+    onChange={onInputChange}
+    data={data}
+    sm={6}
+   />
    <CustomInput
     name="state"
     label="state"
@@ -100,14 +109,6 @@ const CustomCardForm = ({
     data={data}
     sm={6}
     required={false}
-   />
-   <CustomInput
-    name="country"
-    label="country"
-    error={errors.country}
-    onChange={onInputChange}
-    data={data}
-    sm={6}
    />
    <CustomInput
     name="city"
