@@ -10,31 +10,31 @@ import CustomCardForm from "../components/CustomCardForm";
 import { Container } from "@mui/material";
 
 export default function CustomAddCardPage() {
- const { user } = useUser();
- const { handleCreateCard } = useCards();
- const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-  useForm(initialCardForm, cardSchema, handleCreateCard);
+  const { user } = useUser();
+  const { handleCreateCard } = useCards();
+  const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
+    useForm(initialCardForm, cardSchema, handleCreateCard);
 
- if (!user) return <Navigate to={ROUTES.CARDS} />;
+  if (!user) return <Navigate to={ROUTES.CARDS} />;
 
- return (
-  <Container
-   sx={{
-    paddingTop: 8,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-   }}
-  >
-   <CustomCardForm
-    title="add card"
-    onSubmit={onSubmit}
-    onReset={handleReset}
-    errors={errors}
-    validateForm={validateForm}
-    onInputChange={handleChange}
-    data={data}
-   />
-  </Container>
- );
+  return (
+    <Container
+      sx={{
+        paddingTop: 8,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CustomCardForm
+        title="add card"
+        onSubmit={onSubmit}
+        onReset={handleReset}
+        errors={errors}
+        validateForm={validateForm}
+        onInputChange={handleChange}
+        data={data}
+      />
+    </Container>
+  );
 }
