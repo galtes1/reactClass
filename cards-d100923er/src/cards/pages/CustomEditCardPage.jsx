@@ -5,14 +5,14 @@ import { useUser } from "../../users/providers/UserProvider";
 import useForm from "../../forms/hooks/useForm";
 import initialCardForm from "../helpers/initialForms/initialCardForm";
 import cardSchema from "../models/cardSchema";
-import mapCardToModel from "../helpers/normalization/mapToModel";
+import mapCardToModel from "../helpers/normalization/mapCardToModel";
 import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
 import CustomCardForm from "../components/CustomCardForm";
 
 export default function CustomEditCardPage() {
  const { id } = useParams();
- const { handleUpdateCard, getCardById, card } = useCards();
+ const { handleCardUpdate, getCardById, card } = useCards();
  const { user } = useUser();
  const {
   data,
@@ -23,7 +23,7 @@ export default function CustomEditCardPage() {
   validateForm,
   onSubmit,
  } = useForm(initialCardForm, cardSchema, (newCard) =>
-  handleUpdateCard(card._id, newCard)
+  handleCardUpdate(card._id, newCard)
  );
 
  useEffect(() => {

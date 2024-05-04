@@ -5,6 +5,8 @@ import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 import { useUser } from "../../../users/providers/UserProvider";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../../routes/routesModel";
 
 export default function CardActionBar({
  _id,
@@ -13,10 +15,10 @@ export default function CardActionBar({
  userId,
 }) {
  const { user } = useUser();
- console.log(user);
-
+ const navigate = useNavigate();
  const handleCardEdit = (_id) => {
   console.log("lets go and edit card no " + _id);
+  navigate(ROUTES.EDIT_CARD + "/" + _id);
  };
 
  return (

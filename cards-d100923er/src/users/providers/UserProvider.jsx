@@ -5,13 +5,13 @@ import React, {
  useState,
  useEffect,
 } from "react";
-import { getUser } from "../services/localStorageService";
+import { getToken, getUser } from "../services/localStorageService";
 
 const UserContext = createContext();
 
 export default function UserProvider({ children }) {
  const [user, setUser] = useState(null);
- const [token, setToken] = useState();
+ const [token, setToken] = useState(getToken());
 
  useEffect(() => {
   if (!user) {
