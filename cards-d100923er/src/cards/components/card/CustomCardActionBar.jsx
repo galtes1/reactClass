@@ -9,26 +9,26 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 
 export default function CardActionBar({
- _id,
+ cardId,
  handleCardDelete,
  handleCardLike,
  userId,
 }) {
  const { user } = useUser();
  const navigate = useNavigate();
- const handleCardEdit = (_id) => {
-  console.log("lets go and edit card no " + _id);
-  navigate(ROUTES.EDIT_CARD + "/" + _id);
+ const handleCardEdit = (id) => {
+  console.log("lets go and edit card no " + id);
+  navigate(ROUTES.EDIT_CARD + "/" + id);
  };
 
  return (
   <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
    {user && (user.isAdmin || user._id === userId) ? (
     <Box>
-     <IconButton onClick={() => handleCardDelete(_id)}>
+     <IconButton onClick={() => handleCardDelete(cardId)}>
       <DeleteIcon />
      </IconButton>
-     <IconButton onClick={() => handleCardEdit(_id)}>
+     <IconButton onClick={() => handleCardEdit(cardId)}>
       <ModeEditIcon />
      </IconButton>
     </Box>
@@ -37,7 +37,7 @@ export default function CardActionBar({
     <IconButton>
      <CallIcon />
     </IconButton>
-    <IconButton onClick={() => handleCardLike(_id)}>
+    <IconButton onClick={() => handleCardLike(cardId)}>
      <FavoriteIcon />
     </IconButton>
    </Box>

@@ -5,7 +5,7 @@ import { useUser } from "../../users/providers/UserProvider";
 import useForm from "../../forms/hooks/useForm";
 import initialCardForm from "../helpers/initialForms/initialCardForm";
 import cardSchema from "../models/cardSchema";
-import mapCardToModel from "../helpers/normalization/mapCardToModel";
+import mapCardToModel from "../helpers/normalization/mapToModel";
 import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
 import CustomCardForm from "../components/CustomCardForm";

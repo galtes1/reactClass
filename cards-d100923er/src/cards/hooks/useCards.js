@@ -70,12 +70,16 @@ export default function useCards() {
  const handleCardUpdate = useCallback(
   async (cardId, cardFromClient) => {
    setIsLoading(true);
+
    try {
     const card = await editCard(cardId, normalizeCard(cardFromClient));
     setCard(card);
     setSnack("success", `Business Card # ${cardId} Updated Successfully`);
     navigate(ROUTES.ROOT);
-   } catch (error) {}
+   } catch (error) {
+    setError(error.message);
+   }
+   setIsLoading(false);
   },
   [setSnack, navigate]
  );
