@@ -9,8 +9,9 @@ import ROUTES from "../../../routes/routesModel";
 
 function CustomCardComponent({ card, handleCardDelete, handleCardLike }) {
  const navigate = useNavigate();
+
  return (
-  <Card sx={{ width: 250, m: 2, textAlign: "left" }}>
+  <Card sx={{ width: 250, m: 2, textAlign: "left" }} elevation={10}>
    <CardActionArea onClick={() => navigate(ROUTES.CARD_INFO + "/" + card._id)}>
     <CardHeaderComponent image={card.image} />
     <CardBody

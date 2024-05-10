@@ -5,6 +5,7 @@ import CustomFormButton from "./CustomFormButton";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import LoopIcon from "@mui/icons-material/Loop";
+import { useTheme } from "../../providers/CustomThemeProvider";
 
 const CustomForm = ({
  title = "",
@@ -18,8 +19,54 @@ const CustomForm = ({
  children,
 }) => {
  const navigate = useNavigate();
+ const { isDark } = useTheme();
 
- return (
+ return !isDark ? (
+  <Box
+   component="form"
+   color={color}
+   sx={{ mt: 2, p: { xs: 1, sm: 2 }, ...styles }}
+   onSubmit={onSubmit}
+   autoComplete="off"
+   noValidate
+  >
+   <Typography align="center" variant="h5" component="h1" mb={2}>
+    {title.toUpperCase()}
+   </Typography>
+
+   <Grid container spacing={spacing}>
+    {children}
+   </Grid>
+
+   <Grid container spacing={1} my={2} direction="row" width="100">
+    <Grid item xs={12} sm={6}>
+     <CustomFormButton
+      node="cancel"
+      color="error"
+      component="div"
+      variant="outlined"
+      onClick={() => navigate(to)}
+     />
+    </Grid>
+    <Grid item xs={12} sm={6}>
+     <CustomFormButton
+      node={<LoopIcon />}
+      variant="outlined"
+      component="div"
+      onClick={onReset}
+     />
+    </Grid>
+    <Grid item xs={12}>
+     <CustomFormButton
+      node="Submit"
+      onClick={onSubmit}
+      disabled={!validateForm()}
+      size="large"
+     />
+    </Grid>
+   </Grid>
+  </Box>
+ ) : (
   <Box
    component="form"
    color={color}

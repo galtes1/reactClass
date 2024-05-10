@@ -27,7 +27,7 @@ export default function CustomAddCardPage() {
    }}
   >
    <CustomCardForm
-    title="add card"
+    title="add new card"
     onSubmit={onSubmit}
     onReset={handleReset}
     errors={errors}
