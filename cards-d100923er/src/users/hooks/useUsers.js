@@ -1,64 +1,98 @@
 import { useState, useCallback } from "react";
 import { useUser } from "../providers/UserProvider";
-import { login, signup } from "../services/usersApiService";
+import { getUserData, login, signup } from "../services/usersApiService";
 import {
- getUser,
- removeTokenFromLocalStorage,
- setTokenInLocalStorage,
+  getUser,
+  removeTokenFromLocalStorage,
+  setTokenInLocalStorage,
 } from "../services/localStorageService";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
+import { useSnack } from "../../providers/SnackbarProvider";
 
 const useUsers = () => {
- const [isLoading, setIsLoading] = useState();
- const [error, setError] = useState(null);
- const navigate = useNavigate();
- const { setUser, setToken } = useUser();
+  const [isLoading, setIsLoading] = useState();
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const { setUser, setToken } = useUser();
+  const { setSnack } = useSnack;
 
- const handleLogin = useCallback(
-  async (userLogin) => {
-   setIsLoading(true);
-   try {
-    const token = await login(userLogin);
-    setTokenInLocalStorage(token);
-    setToken(token);
-    setUser(getUser());
-    navigate(ROUTES.CARDS);
-   } catch (error) {
-    setError(error.message);
-   }
-   setIsLoading(false);
-  },
-  [setToken, setUser, navigate]
- );
+  const handleLogin = useCallback(
+    async (userLogin, isSigned = false) => {
+      try {
+        setIsLoading(true);
+        const token = await login(userLogin);
+        setTokenInLocalStorage(token);
+        setToken(token);
+        setUser(getUser());
+        navigate(ROUTES.CARDS);
+        isSigned
+          ? setSnack(
+              "success",
+              "filled",
+              "SIGNED UP and LOGGED IN Successfully"
+            )
+          : setSnack("success", "LOGGED IN Successfuly", "filled");
+        return;
+      } catch (error) {
+        setError(error.message);
+        setSnack("error", error.message, "filled");
+        setIsLoading(false);
+      }
+      setIsLoading(false);
+    },
+    [setToken, setUser, navigate, setSnack]
+  );
 
- const handleLogout = useCallback(() => {
-  removeTokenFromLocalStorage();
-  setUser(null);
- }, [setUser]);
+  const handleLogout = useCallback(() => {
+    removeTokenFromLocalStorage();
+    setUser(null);
+    setSnack("success", "logged out👍", "filled");
+  }, [setUser, setSnack]);
 
- const handleSignup = useCallback(
-  async (userFromCLient) => {
-   setIsLoading(true);
-   //console.log(userFromCLient);
-   try {
-    const normalizedUser = normalizeUser(userFromCLient);
-    await signup(normalizedUser);
-    await handleLogin({
-     email: userFromCLient.email,
-     password: userFromCLient.password,
-    });
-   } catch (error) {
-    setError(error.message);
-    console.log(error);
-   }
-   setIsLoading(false);
-  },
-  [handleLogin]
- );
+  const handleSignup = useCallback(
+    async (userFromCLient) => {
+      setIsLoading(true);
+      try {
+        const normalizedUser = normalizeUser(userFromCLient);
+        await signup(normalizedUser);
+        await handleLogin(
+          {
+            email: userFromCLient.email,
+            password: userFromCLient.password,
+          },
+          true
+        );
+      } catch (error) {
+        setError(error.message);
+        console.log(error);
+        setSnack("error", error.message, "filled");
+      }
+      setIsLoading(false);
+    },
+    [handleLogin, setSnack]
+  );
 
- return { isLoading, error, handleLogin, handleLogout, handleSignup };
+  const handleGetUser = useCallback(async (id) => {
+    setIsLoading(true);
+    try {
+      const userData = await getUserData(id);
+      setIsLoading(false);
+      return userData;
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
+
+  return {
+    isLoading,
+    error,
+    handleLogin,
+    handleLogout,
+    handleSignup,
+    handleGetUser,
+  };
 };
 
 export default useUsers;

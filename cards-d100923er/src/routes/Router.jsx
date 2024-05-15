@@ -18,11 +18,12 @@ import ParentComponentPage from "../sandbox/context/ParentComponentPage";
 import CustomAddCardPage from "../cards/pages/CustomAddCardPage";
 import CustomEditCardPage from "../cards/pages/CustomEditCardPage";
 import CustomProfilePage from "../users/pages/CustomProfilePage";
+import CustomMainPage from "../pages/CustomMainPage";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path={ROUTES.ROOT} element={<CustomCardsPage />} />
+      <Route path={ROUTES.ROOT} element={<CustomMainPage />} />
       <Route path={ROUTES.CARDS} element={<CustomCardsPage />} />
       <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
       <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
