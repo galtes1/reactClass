@@ -5,13 +5,13 @@ import CustomInput from "../../forms/components/CustomInput";
 import ROUTES from "../../routes/routesModel";
 
 const CustomCardForm = ({
+  title,
   onSubmit,
   onReset,
   errors,
   validateForm,
   onInputChange,
   data,
-  title,
 }) => {
   return (
     <CustomForm
