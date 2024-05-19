@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   createCard,
   deleteCard,
@@ -8,18 +8,36 @@ import {
 } from "../services/cardsApiService";
 import { useSnack } from "../../providers/SnackbarProvider";
 import ROUTES from "../../routes/routesModel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
+import { useMemo } from "react";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [query, setQuery] = useState("");
+  const [filteredCards, setFilter] = useState(null);
+  const [searchParams] = useSearchParams();
 
   const setSnack = useSnack();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+  useEffect(() => {
+    if (cards) {
+      setFilter(
+        cards.filter(
+          (card) =>
+            card.title.includes(query) || String(card.bizNumber).includes(query)
+        )
+      );
+    }
+  }, [cards, query]);
 
   useAxios();
 
@@ -109,11 +127,12 @@ export default function useCards() {
   const handleCardLike = useCallback((id) => {
     console.log("you liked card no" + id);
   }, []);
+
+  const value = useMemo(() => {
+    return { isLoading, cards, card, error, filteredCards };
+  }, [isLoading, cards, card, error, filteredCards]);
   return {
-    card,
-    cards,
-    error,
-    isLoading,
+    value,
     getAllCards,
     getCardById,
     handleCardDelete,

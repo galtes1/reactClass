@@ -32,7 +32,7 @@ export const getMyCards = async () => {
 
 export const deleteCard = async (cardId) => {
   try {
-    const { data } = await axios.delete(`${apiUrl}/${cardId}`);
+    const { data } = await axios.delete(`${apiUrl}/cards/${cardId}`);
     return data;
   } catch (error) {
     return Promise.reject(error.message);

@@ -3,19 +3,34 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import React from "react";
+import React, { useState } from "react";
 import { useUser } from "../../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
+import CardDeleteDialog from "./CardDeleteDialog";
 
 export default function CardActionBar({
   cardId,
-  handleCardDelete,
   handleCardLike,
   userId,
+  handleDelete,
 }) {
   const { user } = useUser();
+
   const navigate = useNavigate();
+
+  const [isDialogOpen, setDialog] = useState(false);
+
+  const handleDialog = (term) => {
+    if (term === "open") return setDialog(true);
+    setDialog(false);
+  };
+
+  const handleCardDelete = () => {
+    handleDialog(false);
+    handleDelete(cardId);
+  };
+
   const handleCardEdit = (id) => {
     console.log("lets go and edit card no " + id);
     navigate(ROUTES.EDIT_CARD + "/" + cardId);
@@ -23,25 +38,32 @@ export default function CardActionBar({
   };
 
   return (
-    <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
-      {user && (user.isAdmin || user._id === userId) ? (
+    <>
+      <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
+        {user && (user.isAdmin || user._id === userId) ? (
+          <Box>
+            <IconButton onClick={() => handleCardDelete(cardId)}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton onClick={() => handleCardEdit(cardId)}>
+              <ModeEditIcon />
+            </IconButton>
+          </Box>
+        ) : null}
         <Box>
-          <IconButton onClick={() => handleCardDelete(cardId)}>
-            <DeleteIcon />
+          <IconButton>
+            <CallIcon />
           </IconButton>
-          <IconButton onClick={() => handleCardEdit(cardId)}>
-            <ModeEditIcon />
+          <IconButton onClick={() => handleCardLike(cardId)}>
+            <FavoriteIcon />
           </IconButton>
         </Box>
-      ) : null}
-      <Box>
-        <IconButton>
-          <CallIcon />
-        </IconButton>
-        <IconButton onClick={() => handleCardLike(cardId)}>
-          <FavoriteIcon />
-        </IconButton>
-      </Box>
-    </CardActions>
+      </CardActions>
+      <CardDeleteDialog
+        isDialogOpen={isDialogOpen}
+        onChangeDialog={() => setDialog(false)}
+        onDelete={handleCardDelete}
+      />
+    </>
   );
 }

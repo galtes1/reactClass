@@ -7,9 +7,9 @@ import { useTheme } from "../../../../providers/CustomThemeProvider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import CustomMoreMenu from "./CustomMoreMenu";
+import CustomSearchBar from "./CustomSearchBar";
 
 export default function CustomRightNavBar() {
-
   const { user } = useUser();
   const { isDark, toggleDarkMode } = useTheme();
 
@@ -21,13 +21,14 @@ export default function CustomRightNavBar() {
           alignItems: "center",
         }}
       >
+        <CustomSearchBar />
         <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
         {user && <CustomLogged />}
         {!user && <CustomNotLogged />}
       </Box>
-      <CustomMoreMenu/>
+      <CustomMoreMenu />
     </>
   );
 }

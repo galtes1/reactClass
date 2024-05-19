@@ -6,33 +6,24 @@ import useCards from "../hooks/useCards";
 import CustomNewCardButton from "../components/CustomNewCardButton";
 
 export default function CustomCardsPage() {
- const {
-  cards,
-  error,
-  isLoading,
-  getAllCards,
-  handleCardDelete,
-  handleCardLike,
- } = useCards();
+  const { value, getAllCards, handleCardDelete, handleCardLike } = useCards();
+  const { error, isLoading, filteredCards } = value;
 
- useEffect(() => {
-  getAllCards();
- }, [getAllCards]);
+  useEffect(() => {
+    getAllCards();
+  }, [getAllCards]);
 
- return (
-  <div>
-   <CustomPageHeader
-    title="Cards"
-    subtitle="on this page you can find explanations about using the app"
-   />
-   <CustomCardsFeedback
-    cards={cards}
-    handleCardDelete={handleCardDelete}
-    handleCardLike={handleCardLike}
-    isLoading={isLoading}
-    error={error}
-   />
-   <CustomNewCardButton />
-  </div>
- );
+  return (
+    <div>
+      <CustomPageHeader title="Cards" subtitle="All Available Cards" />
+      <CustomCardsFeedback
+        cards={filteredCards}
+        handleCardDelete={handleCardDelete}
+        handleCardLike={handleCardLike}
+        isLoading={isLoading}
+        error={error}
+      />
+      <CustomNewCardButton />
+    </div>
+  );
 }
