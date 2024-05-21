@@ -13,12 +13,16 @@ export default function CustomCardsPage() {
     getAllCards();
   }, [getAllCards]);
 
+  const handleDelete = async (cardId) => {
+    await handleCardDelete(cardId);
+    getAllCards();
+  };
   return (
     <div>
       <CustomPageHeader title="Cards" subtitle="All Available Cards" />
       <CustomCardsFeedback
         cards={filteredCards}
-        handleCardDelete={handleCardDelete}
+        handleDelete={handleDelete}
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}

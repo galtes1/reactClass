@@ -106,12 +106,12 @@ export default function useCards() {
   );
 
   const handleCardDelete = useCallback(
-    async (id) => {
-      setIsLoading(true);
+    async (cardId) => {
       try {
-        const card = await deleteCard(id);
+        setIsLoading(true);
+        const card = await deleteCard(cardId);
         setCard(card);
-        setSnack("primary", `card no. ${id} deleted`, "filled");
+        setSnack("primary", `card no. ${cardId} deleted`, "filled");
         setTimeout(() => {
           getAllCards();
         }, 1000);

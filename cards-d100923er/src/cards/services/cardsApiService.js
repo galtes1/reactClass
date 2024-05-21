@@ -22,7 +22,7 @@ export const getCard = async (cardId) => {
 
 export const getMyCards = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/cards/my-cards`);
+    const response = await axios.get(`${apiUrl}/my-cards`);
     const data = response.data;
     return data;
   } catch (error) {
@@ -32,7 +32,7 @@ export const getMyCards = async () => {
 
 export const deleteCard = async (cardId) => {
   try {
-    const { data } = await axios.delete(`${apiUrl}/cards/${cardId}`);
+    const { data } = await axios.delete(`${apiUrl}/${cardId}`);
     return data;
   } catch (error) {
     return Promise.reject(error.message);

@@ -16,10 +16,9 @@ export default function CardActionBar({
   handleDelete,
 }) {
   const { user } = useUser();
+  const [isDialogOpen, setDialog] = useState(false);
 
   const navigate = useNavigate();
-
-  const [isDialogOpen, setDialog] = useState(false);
 
   const handleDialog = (term) => {
     if (term === "open") return setDialog(true);
@@ -42,7 +41,10 @@ export default function CardActionBar({
       <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
         {user && (user.isAdmin || user._id === userId) ? (
           <Box>
-            <IconButton onClick={() => handleCardDelete(cardId)}>
+            <IconButton
+              aria-label="delete card"
+              onClick={() => handleDialog("open")}
+            >
               <DeleteIcon />
             </IconButton>
             <IconButton onClick={() => handleCardEdit(cardId)}>

@@ -9,7 +9,7 @@ export default function CustomCardsFeedback({
   isLoading,
   cards,
   error,
-  handleCardDelete,
+  handleDelete,
   handleCardLike,
 }) {
   if (isLoading) return <CustomSpinner />;
@@ -23,7 +23,7 @@ export default function CustomCardsFeedback({
     return (
       <CustomCards
         cards={cards}
-        handleCardDelete={handleCardDelete}
+        handleDelete={handleDelete}
         handleCardLike={handleCardLike}
       />
     );
