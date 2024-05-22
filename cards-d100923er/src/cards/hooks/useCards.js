@@ -39,32 +39,36 @@ export default function useCards() {
     }
   }, [cards, query]);
 
+  const requestStatus = (loading, errorMessage, cards, card = null) => {
+    setIsLoading(loading);
+    setError(errorMessage);
+    setCards(cards);
+    setCard(card);
+  };
+
   useAxios();
 
   const getAllCards = useCallback(async () => {
     try {
-      setError(null);
       setIsLoading(true);
-      const data = await getCards();
-      setCards(data);
+      const cards = await getCards();
+      requestStatus(false, null, cards);
       setSnack("success", "displaying all cards");
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      requestStatus(false, error.message, null);
     }
-    setIsLoading(false);
   }, [setSnack]);
 
-  const getCardById = useCallback(async (id) => {
+  const getCardById = useCallback(async (cardId) => {
     try {
-      setError(null);
       setIsLoading(true);
-      const data = await getCard(id);
-      setCard(data);
-      return data;
-    } catch (err) {
-      setError(err.message);
+      const card = await getCard(cardId);
+      requestStatus(false, null, null, card);
+      console.log("card form useCards:", card);
+      return card;
+    } catch (error) {
+      requestStatus(false, error, null);
     }
-    setIsLoading(false);
   }, []);
 
   const handleCardCreate = useCallback(
@@ -111,10 +115,10 @@ export default function useCards() {
         setIsLoading(true);
         const card = await deleteCard(cardId);
         setCard(card);
-        setSnack("primary", `card no. ${cardId} deleted`, "filled");
+        setSnack("error", `card no. ${cardId} deleted`, "filled");
         setTimeout(() => {
           getAllCards();
-        }, 1000);
+        }, 2000);
       } catch (error) {
         setError(error.message);
       }
@@ -125,7 +129,8 @@ export default function useCards() {
   );
 
   const handleCardLike = useCallback((id) => {
-    console.log("you liked card no" + id);
+    try {
+    } catch (error) {}
   }, []);
 
   const value = useMemo(() => {

@@ -34,7 +34,7 @@ export default function Router() {
         element={<CustomEditCardPage />}
       />
       <Route
-        path={ROUTES.CARD_INFO + "/:id"}
+        path={ROUTES.CARD_INFO + "/:cardId"}
         element={<CustomCardDetailsPage />}
       />
       <Route path={ROUTES.USER_PROFILE} element={<CustomProfilePage />} />

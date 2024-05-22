@@ -20,7 +20,7 @@ const CustomCardForm = ({
       errors={errors}
       validateForm={validateForm}
       styles={{ maxWidth: "800px" }}
-      to={ROUTES.ROOT}
+      to={ROUTES.CARDS}
       onSubmit={onSubmit}
     >
       <CustomInput

@@ -7,23 +7,27 @@ import CustomSpinner from "../../components/CustomSpinner";
 import CustomError from "../../components/CustomError";
 
 export default function CustomCardDetailsPage() {
- const { id } = useParams();
- const { card, error, isLoading, getCardById } = useCards();
+  const { cardId } = useParams();
+  const { value, getCardById } = useCards();
+  const { card, error, isLoading } = value;
 
- useEffect(() => {
-  getCardById(id);
- }, [id, getCardById]);
+  useEffect(() => {
+    getCardById(cardId);
+  }, [cardId, getCardById]);
 
- if (isLoading) return <CustomSpinner />;
- if (error) return <CustomError errorMessage={error} />;
- return (
-  <Container>
-   <CustomPageHeader
-    title="card details"
-    subtitle="this is the card you chose"
-   />
-   <Typography>this is business no. {id}</Typography>
-   <Typography>card title: {card.title}</Typography>
-  </Container>
- );
+  if (isLoading) return <CustomSpinner />;
+  if (error) return <CustomError errorMessage={error} />;
+  if (card) {
+    return (
+      <Container>
+        <CustomPageHeader
+          title="card details"
+          subtitle="this is the card you chose"
+        />
+        <Typography>this is business no. {cardId}</Typography>
+        <Typography>card title: {card.title}</Typography>
+      </Container>
+    );
+  }
+  return null;
 }

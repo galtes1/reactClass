@@ -15,8 +15,8 @@ export const getCard = async (cardId) => {
   try {
     const response = await axios.get(`${apiUrl}/${cardId}`);
     return response.data;
-  } catch (err) {
-    throw new Error(err.message);
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
 
