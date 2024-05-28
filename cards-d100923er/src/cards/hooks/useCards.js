@@ -136,6 +136,7 @@ export default function useCards() {
         const card = await changeLikeStatus(cardId);
         setSnack("success", "The business card has been Liked");
         requestStatus();
+        // commit and sync
       } catch (error) {
         requestStatus(false, error, null);
       }
