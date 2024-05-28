@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  changeLikeStatus,
   createCard,
   deleteCard,
   editCard,
@@ -128,10 +129,19 @@ export default function useCards() {
     [setSnack, getAllCards]
   );
 
-  const handleCardLike = useCallback((id) => {
-    try {
-    } catch (error) {}
-  }, []);
+  const handleCardLike = useCallback(
+    async (cardId) => {
+      isLoading(false);
+      try {
+        const card = await changeLikeStatus(cardId);
+        setSnack("success", "The business card has been Liked");
+        requestStatus();
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [isLoading, setSnack]
+  );
 
   const value = useMemo(() => {
     return { isLoading, cards, card, error, filteredCards };
