@@ -41,7 +41,7 @@ function CustomCardComponent({ card, handleDelete, handleLike }) {
           handleDelete={handleDelete}
           handleLike={handleLike}
           userId={card.user_id}
-          cardLikes={card.cardLikes}
+          cardLikes={card.likes}
         />
       </div>
     </Card>

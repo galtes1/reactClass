@@ -11,6 +11,7 @@ export default function CustomCardsFeedback({
   error,
   handleDelete,
   handleLike,
+  cardLikes,
 }) {
   if (isLoading) return <CustomSpinner />;
   if (error) return <CustomError />;
