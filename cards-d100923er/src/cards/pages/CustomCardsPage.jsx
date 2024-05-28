@@ -11,20 +11,24 @@ export default function CustomCardsPage() {
 
   useEffect(() => {
     getAllCards();
-  }, [getAllCards]);
+  }, [getAllCards, handleCardLike]);
 
   const handleDelete = async (cardId) => {
     await handleCardDelete(cardId);
     getAllCards();
+  };
+
+  const handleLike = async (cardId) => {
+    await handleCardLike(cardId);
   };
   return (
     <div>
       <CustomPageHeader title="Cards" subtitle="All Available Cards" />
       <CustomCardsFeedback
         cards={filteredCards}
-        handleDelete={handleDelete}
-        handleCardLike={handleCardLike}
         isLoading={isLoading}
+        handleDelete={handleDelete}
+        handleLike={handleLike}
         error={error}
       />
       <CustomNewCardButton />

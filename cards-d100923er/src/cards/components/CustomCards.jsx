@@ -2,7 +2,7 @@ import { Box, Container } from "@mui/material";
 import React from "react";
 import CustomCardComponent from "./card/CustomCardComponent";
 
-export default function CustomCards({ cards, handleDelete, handleCardLike }) {
+export default function CustomCards({ cards, handleDelete, handleLike }) {
   return (
     <Container
       sx={{
@@ -16,7 +16,7 @@ export default function CustomCards({ cards, handleDelete, handleCardLike }) {
           <CustomCardComponent
             card={card}
             handleDelete={handleDelete}
-            handleCardLike={handleCardLike}
+            handleLike={handleLike}
           />
         </Box>
       ))}

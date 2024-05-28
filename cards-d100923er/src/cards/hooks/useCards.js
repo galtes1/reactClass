@@ -13,6 +13,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
 import { useMemo } from "react";
+import { useUser } from "../../users/providers/UserProvider";
 
 export default function useCards() {
   const [card, setCard] = useState(null);
@@ -22,6 +23,7 @@ export default function useCards() {
   const [query, setQuery] = useState("");
   const [filteredCards, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
+  const { user } = useUser();
 
   const setSnack = useSnack();
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ export default function useCards() {
   useEffect(() => {
     setQuery(searchParams.get("q") ?? "");
   }, [searchParams]);
+
   useEffect(() => {
     if (cards) {
       setFilter(
@@ -129,20 +132,26 @@ export default function useCards() {
     [setSnack, getAllCards]
   );
 
+  //handleLikeCard
   const handleCardLike = useCallback(
     async (cardId) => {
-      isLoading(false);
       try {
-        const card = await changeLikeStatus(cardId);
-        setSnack("success", "The business card has been Liked");
-        requestStatus();
-        // commit and sync
+        await changeLikeStatus(cardId);
+        setSnack("success", "like 👍");
       } catch (error) {
         requestStatus(false, error, null);
       }
     },
-    [isLoading, setSnack]
+    [setSnack]
   );
+  const handleGetFavCards = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const cards = await getCards();
+      const favCards = cards.filter((card) => card.likes.includes(user.id));
+      requestStatus(false, null, favCards);
+    } catch (error) {}
+  }, [user]);
 
   const value = useMemo(() => {
     return { isLoading, cards, card, error, filteredCards };
@@ -155,5 +164,6 @@ export default function useCards() {
     handleCardLike,
     handleCardCreate,
     handleCardUpdate,
+    handleGetFavCards,
   };
 }

@@ -7,7 +7,7 @@ import CardActionBar from "./CustomCardActionBar";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 
-function CustomCardComponent({ card, handleDelete, handleCardLike }) {
+function CustomCardComponent({ card, handleDelete, handleLike }) {
   const navigate = useNavigate();
 
   return (
@@ -39,8 +39,9 @@ function CustomCardComponent({ card, handleDelete, handleCardLike }) {
         <CardActionBar
           cardId={card._id}
           handleDelete={handleDelete}
-          handleCardLike={handleCardLike}
+          handleLike={handleLike}
           userId={card.user_id}
+          cardLikes={card.cardLikes}
         />
       </div>
     </Card>

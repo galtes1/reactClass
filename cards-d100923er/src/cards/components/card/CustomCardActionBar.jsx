@@ -11,13 +11,16 @@ import CardDeleteDialog from "./CardDeleteDialog";
 
 export default function CardActionBar({
   cardId,
-  handleCardLike,
   userId,
   handleDelete,
+  handleLike,
+  cardLikes,
 }) {
   const { user } = useUser();
   const [isDialogOpen, setDialog] = useState(false);
-
+  const [isLiked, setIsLiked] = useState(
+    () => cardLikes && cardLikes.includes(user?._id)
+  );
   const navigate = useNavigate();
 
   const handleDialog = (term) => {
@@ -34,6 +37,11 @@ export default function CardActionBar({
     console.log("lets go and edit card no " + id);
     navigate(ROUTES.EDIT_CARD + "/" + cardId);
     console.log(cardId);
+  };
+
+  const handleCardLike = async () => {
+    await handleLike(cardId);
+    setIsLiked((prev) => !prev);
   };
 
   return (
@@ -56,8 +64,11 @@ export default function CardActionBar({
           <IconButton>
             <CallIcon />
           </IconButton>
-          <IconButton onClick={() => handleCardLike(cardId)}>
-            <FavoriteIcon />
+          <IconButton
+            aria-label="like this card"
+            onClick={() => handleCardLike(cardId)}
+          >
+            <FavoriteIcon color={isLiked ? "error" : "inherit"} />
           </IconButton>
         </Box>
       </CardActions>
