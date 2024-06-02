@@ -132,7 +132,6 @@ export default function useCards() {
     [setSnack, getAllCards]
   );
 
-  //handleLikeCard
   const handleCardLike = useCallback(
     async (cardId) => {
       try {
