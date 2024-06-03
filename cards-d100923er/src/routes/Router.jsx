@@ -19,6 +19,7 @@ import CustomAddCardPage from "../cards/pages/CustomAddCardPage";
 import CustomEditCardPage from "../cards/pages/CustomEditCardPage";
 import CustomProfilePage from "../users/pages/CustomProfilePage";
 import CustomMainPage from "../pages/CustomMainPage";
+import FavCardsPage from "../cards/pages/FavCardsPage";
 
 export default function Router() {
   return (
@@ -37,6 +38,7 @@ export default function Router() {
         path={ROUTES.CARD_INFO + "/:cardId"}
         element={<CustomCardDetailsPage />}
       />
+      <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
       <Route path={ROUTES.USER_PROFILE} element={<CustomProfilePage />} />
       <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
       <Route path={ROUTES.SANDBOX} element={<CustomSandBoxPage />}>

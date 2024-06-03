@@ -28,11 +28,7 @@ const useUsers = () => {
         setUser(getUser());
         navigate(ROUTES.CARDS);
         isSigned
-          ? setSnack(
-              "success",
-              "filled",
-              "SIGNED UP and LOGGED IN Successfully"
-            )
+          ? setSnack("success", "filled", "logged in 👍")
           : setSnack("success", "LOGGED IN Successfuly", "filled");
         return;
       } catch (error) {

@@ -100,7 +100,6 @@ export default function useCards() {
       setIsLoading(true);
 
       try {
-        debugger;
         const card = await editCard(cardId, normalizeCard(cardFromClient));
         setCard(card);
         setSnack("success", `Business Card # ${cardId} Updated Successfully`);
