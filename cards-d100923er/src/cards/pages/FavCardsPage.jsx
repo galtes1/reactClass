@@ -6,14 +6,18 @@ import CustomCardsFeedback from "../components/CustomCardsFeedback";
 import { useUser } from "../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
-import CustomAddCardPage from "./CustomAddCardPage";
+import { useSnack } from "../../providers/SnackbarProvider";
+import CustomNewCardButton from "../components/CustomNewCardButton";
 
 const FavCardsPage = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+
   const { value, ...rest } = useCards();
-  const { error, isLoading, cards } = value;
-  const { handleCardDelete, handleGetFavCards } = rest;
+  const { error, isLoading, filteredCards } = value;
+
+  const { handleCardDelete, handleGetFavCards, handleCardLike } = rest;
+  const setSnack = useSnack();
 
   useEffect(() => {
     if (!user) {
@@ -31,9 +35,12 @@ const FavCardsPage = () => {
     [handleCardDelete, handleGetFavCards]
   );
 
-  const changeLikeStatus = useCallback(async () => {
-    await handleGetFavCards();
-  }, [handleGetFavCards]);
+  const handleLike = useCallback(
+    async (CardId) => {
+      await handleCardLike();
+    },
+    [handleCardLike]
+  );
   return (
     <Container>
       <CustomPageHeader
@@ -43,11 +50,11 @@ const FavCardsPage = () => {
       <CustomCardsFeedback
         isLoading={isLoading}
         error={error}
-        cards={cards}
+        cards={filteredCards}
         handleDelete={deleteFavCard}
-        handleLike={changeLikeStatus}
+        handleLike={handleLike}
       />
-      <CustomAddCardPage />
+      <CustomNewCardButton />
     </Container>
   );
 };

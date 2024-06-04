@@ -18,7 +18,6 @@ export default function CardActionBar({
 }) {
   const { user } = useUser();
   const [isDialogOpen, setDialog] = useState(false);
-
   const [isLiked, setIsLiked] = useState(
     () => cardLikes && cardLikes.includes(user?._id)
   );
