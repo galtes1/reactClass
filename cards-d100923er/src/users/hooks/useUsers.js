@@ -12,33 +12,56 @@ import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../../providers/SnackbarProvider";
 
 const useUsers = () => {
-  const [isLoading, setIsLoading] = useState();
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
   const { setUser, setToken } = useUser();
+
+  const requestStatus = useCallback(
+    (loading, errorMessage, user = null) => {
+      setIsLoading(loading);
+      setUser(user);
+      setError(errorMessage);
+    },
+    [setUser, setIsLoading, setError]
+  );
+
   const { setSnack } = useSnack;
 
+  // const handleLogin = useCallback(
+  //   async (user, isSigned = false) => {
+  //     try {
+  //       setIsLoading(true);
+  //       const token = await login(user);
+  //       setTokenInLocalStorage(token);
+  //       setToken(token);
+  //       const userFromLocalStorage = getUser();
+  //       requestStatus(false, null, userFromLocalStorage);
+  //       navigate(ROUTES.CARDS);
+  //       isSigned
+  //         ? setSnack("success", "SIGNED and LOGGED IN Successfully", "filled")
+  //         : setSnack("success", "LOGGED IN Successfuly", "filled");
+  //       return;
+  //     } catch (error) {
+  //       requestStatus(false, error, null);
+  //     }
+  //   },
+  //   [navigate, requestStatus, setToken, setSnack]
+  // );
+
   const handleLogin = useCallback(
-    async (userLogin, isSigned = false) => {
+    async (userLogin) => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const token = await login(userLogin);
         setTokenInLocalStorage(token);
         setToken(token);
         setUser(getUser());
         navigate(ROUTES.CARDS);
-        isSigned
-          ? setSnack(
-              "success",
-              "filled",
-              "SIGNED UP and LOGGED IN Successfully"
-            )
-          : setSnack("success", "LOGGED IN Successfuly", "filled");
-        return;
       } catch (error) {
         setError(error.message);
-        setSnack("error", error.message, "filled");
-        setIsLoading(false);
+        setSnack("error", "Incorrect email or password", "filled");
       }
       setIsLoading(false);
     },
@@ -48,8 +71,8 @@ const useUsers = () => {
   const handleLogout = useCallback(() => {
     removeTokenFromLocalStorage();
     setUser(null);
-    setSnack("success", "logged out👍", "filled");
-  }, [setUser, setSnack]);
+    // setSnack("success", "logged out👍", "filled");
+  }, [setUser]);
 
   const handleSignup = useCallback(
     async (userFromCLient) => {

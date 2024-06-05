@@ -132,7 +132,6 @@ export default function useCards() {
     [setSnack, getAllCards]
   );
 
-  //handleLikeCard
   const handleCardLike = useCallback(
     async (cardId) => {
       try {
@@ -148,9 +147,11 @@ export default function useCards() {
     try {
       setIsLoading(true);
       const cards = await getCards();
-      const favCards = cards.filter((card) => card.likes.includes(user.id));
+      const favCards = cards.filter((card) => card.likes.includes(user._id));
       requestStatus(false, null, favCards);
-    } catch (error) {}
+    } catch (error) {
+      requestStatus(false, error, null);
+    }
   }, [user]);
 
   const value = useMemo(() => {
