@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useCards from "../hooks/useCards";
 import { Container } from "@mui/material";
 import CustomPageHeader from "../../components/CustomPageHeader";
@@ -8,55 +8,53 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 import { useSnack } from "../../providers/SnackbarProvider";
 import CustomNewCardButton from "../components/CustomNewCardButton";
+import CustomSpinner from "../../components/CustomSpinner";
+import { Navigate } from "react-router-dom";
 
 const FavCardsPage = () => {
-  const { user } = useUser();
-  const navigate = useNavigate();
+ const { user } = useUser();
 
-  const { value, ...rest } = useCards();
-  const { error, isLoading, filteredCards } = value;
+ const navigate = useNavigate();
 
-  const { handleCardDelete, handleGetFavCards, handleCardLike } = rest;
-  const setSnack = useSnack();
+ const { value, ...rest } = useCards();
+ const { error, isLoading, filteredCards } = value;
 
-  useEffect(() => {
-    if (!user) {
-      navigate(ROUTES.CARDS);
-    } else {
-      handleGetFavCards();
-    }
-  }, [handleGetFavCards, user, navigate]);
+ const { handleCardDelete, handleGetFavCards, handleCardLike, getAllCards } =
+  rest;
 
-  const deleteFavCard = useCallback(
-    async (CardId) => {
-      await handleCardDelete(CardId);
-      await handleGetFavCards();
-    },
-    [handleCardDelete, handleGetFavCards]
-  );
+ useEffect(() => {
+  if (!user) {
+   navigate(ROUTES.CARDS);
+  } else {
+   handleGetFavCards();
+  }
+ }, [user, handleGetFavCards, navigate]);
 
-  const handleLike = useCallback(
-    async (CardId) => {
-      await handleCardLike();
-    },
-    [handleCardLike]
-  );
-  return (
-    <Container>
-      <CustomPageHeader
-        title="Your Favorites Cards"
-        subtitle="All here For You"
-      />
-      <CustomCardsFeedback
-        isLoading={isLoading}
-        error={error}
-        cards={filteredCards}
-        handleDelete={deleteFavCard}
-        handleLike={handleLike}
-      />
-      <CustomNewCardButton />
-    </Container>
-  );
+ const handleDelete = async (id) => {
+  await handleCardDelete(id);
+  await handleGetFavCards();
+ };
+
+ const handleLike = async (id) => {
+  await handleCardLike(id);
+  await handleGetFavCards();
+ };
+
+ if (!user) return <Navigate to={ROUTES.ROOT} replace />;
+
+ return (
+  <Container>
+   <CustomPageHeader title="Your Favorites Cards" subtitle="All here For You" />
+   <CustomCardsFeedback
+    isLoading={isLoading}
+    error={error}
+    cards={filteredCards}
+    handleDelete={handleDelete}
+    handleLike={handleLike}
+   />
+   <CustomNewCardButton />
+  </Container>
+ );
 };
 
 export default FavCardsPage;
