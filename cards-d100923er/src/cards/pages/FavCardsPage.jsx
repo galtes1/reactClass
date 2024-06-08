@@ -1,15 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import useCards from "../hooks/useCards";
 import { Container } from "@mui/material";
 import CustomPageHeader from "../../components/CustomPageHeader";
 import CustomCardsFeedback from "../components/CustomCardsFeedback";
 import { useUser } from "../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/routesModel";
-import { useSnack } from "../../providers/SnackbarProvider";
 import CustomNewCardButton from "../components/CustomNewCardButton";
-import CustomSpinner from "../../components/CustomSpinner";
-import { Navigate } from "react-router-dom";
 
 const FavCardsPage = () => {
  const { user } = useUser();
@@ -19,28 +15,27 @@ const FavCardsPage = () => {
  const { value, ...rest } = useCards();
  const { error, isLoading, filteredCards } = value;
 
- const { handleCardDelete, handleGetFavCards, handleCardLike, getAllCards } =
-  rest;
+ const { handleCardDelete, handleGetFavCards, handleCardLike } = rest;
 
  useEffect(() => {
-  if (!user) {
-   navigate(ROUTES.CARDS);
-  } else {
-   handleGetFavCards();
-  }
+  handleGetFavCards();
  }, [user, handleGetFavCards, navigate]);
 
- const handleDelete = async (id) => {
-  await handleCardDelete(id);
-  await handleGetFavCards();
- };
+ const handleDelete = useCallback(
+  async (id) => {
+   await handleCardDelete(id);
+   await handleGetFavCards();
+  },
+  [handleGetFavCards, handleCardDelete]
+ );
 
- const handleLike = async (id) => {
-  await handleCardLike(id);
-  await handleGetFavCards();
- };
-
- if (!user) return <Navigate to={ROUTES.ROOT} replace />;
+ const handleLike = useCallback(
+  async (id) => {
+   await handleCardLike(id);
+   await handleGetFavCards();
+  },
+  [handleCardLike, handleGetFavCards]
+ );
 
  return (
   <Container>

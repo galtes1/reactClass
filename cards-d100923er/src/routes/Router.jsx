@@ -19,6 +19,7 @@ import CustomAddCardPage from "../cards/pages/CustomAddCardPage";
 import CustomEditCardPage from "../cards/pages/CustomEditCardPage";
 import CustomProfilePage from "../users/pages/CustomProfilePage";
 import FavCardsPage from "../cards/pages/FavCardsPage";
+import MyCardsPage from "../cards/pages/MyCardsPage";
 
 export default function Router() {
  return (
@@ -30,6 +31,7 @@ export default function Router() {
    <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
    <Route path={ROUTES.CREATE_CARD} element={<CustomAddCardPage />} />
    <Route path={ROUTES.EDIT_CARD + "/:id"} element={<CustomEditCardPage />} />
+   <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
    <Route
     path={ROUTES.CARD_INFO + "/:cardId"}
     element={<CustomCardDetailsPage />}

@@ -6,6 +6,7 @@ import {
  editCard,
  getCard,
  getCards,
+ getMyCards,
 } from "../services/cardsApiService";
 import { useSnack } from "../../providers/SnackbarProvider";
 import ROUTES from "../../routes/routesModel";
@@ -174,7 +175,11 @@ export default function useCards() {
  const handleCardLike = useCallback(
   async (cardId) => {
    try {
-    await changeLikeStatus(cardId);
+    // await changeLikeStatus(cardId);
+    const updatedCard = await changeLikeStatus(cardId);
+    setCards((prevCards) =>
+     prevCards.map((card) => (card._id === cardId ? updatedCard : card))
+    );
     setSnack("success", "like 👍");
    } catch (error) {
     requestStatus(false, error, null);
@@ -187,10 +192,22 @@ export default function useCards() {
   try {
    setIsLoading(true);
    const cards = await getCards();
-   const favCards = cards.filter((card) => card.likes.includes(user.id));
+   const favCards = cards.filter((card) => card.likes.includes(user._id));
    requestStatus(false, null, favCards);
-  } catch (error) {}
+  } catch (error) {
+   requestStatus(false, error, null);
+  }
  }, [user]);
+
+ const handleGetMyCards = useCallback(async () => {
+  try {
+   setIsLoading(true);
+   const cards = await getMyCards();
+   requestStatus(false, null, cards);
+  } catch (error) {
+   requestStatus(false, error, null);
+  }
+ }, []);
 
  const value = useMemo(() => {
   return { isLoading, cards, card, error, filteredCards, filterCount };
@@ -204,5 +221,6 @@ export default function useCards() {
   handleCardCreate,
   handleCardUpdate,
   handleGetFavCards,
+  handleGetMyCards,
  };
 }

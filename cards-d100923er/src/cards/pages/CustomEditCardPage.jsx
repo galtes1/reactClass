@@ -23,7 +23,7 @@ export default function CustomEditCardPage() {
   validateForm,
   onSubmit,
  } = useForm(initialCardForm, cardSchema, (newCard) =>
-  handleCardUpdate(card._id, newCard)
+  handleCardUpdate(id, newCard)
  );
 
  useEffect(() => {
