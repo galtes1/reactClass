@@ -7,24 +7,26 @@ import ROUTES from "../../../../routes/routesModel";
 import { useUser } from "../../../../users/providers/UserProvider";
 
 export default function CustomLeftNavBar() {
- const { user } = useUser();
- return (
-  <>
-   <Box>
-    <CustomLogoIcon />
-    <CustomLogo />
-    <CustomNavItem to={ROUTES.ABOUT} label={"about"} />
-    <CustomNavItem to={ROUTES.CARDS} label={"cards"} />
-    {/*  */}
-    {user && (user.isAdmin || user.isBusiness === true) ? (
-     <CustomNavItem to={ROUTES.MY_CARDS} label={"my cards"} />
-    ) : null}
-    {user ? (
-     <CustomNavItem to={ROUTES.FAV_CARDS} label={"favorite cards"} />
-    ) : null}{" "}
-    <CustomNavItem to={ROUTES.SANDBOX} label={"sandbox"} />
-    {/*  */}
-   </Box>
-  </>
- );
+  const { user } = useUser();
+  return (
+    <>
+      <Box>
+        <CustomLogoIcon />
+        <CustomLogo />
+        <CustomNavItem to={ROUTES.ABOUT} label={"about"} />
+        <CustomNavItem to={ROUTES.CARDS} label={"cards"} />
+        {/*  */}
+        {user && (user.isAdmin || user.isBusiness === true) ? (
+          <CustomNavItem to={ROUTES.MY_CARDS} label={"my cards"} />
+        ) : null}
+        {user ? (
+          <CustomNavItem to={ROUTES.FAV_CARDS} label={"favorite cards"} />
+        ) : null}{" "}
+        {/*  */}
+        {user && user.isAdmin ? (
+          <CustomNavItem to={ROUTES.SANDBOX} label={"sandbox"} />
+        ) : null}
+      </Box>
+    </>
+  );
 }
