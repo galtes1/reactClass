@@ -26,7 +26,7 @@ export default function CustomMenu({ isOpen, anchorEl, onClose }) {
     >
       <Box>
         <CustomMenuLink
-          text="about"
+          text="About"
           navigateTo={ROUTES.ABOUT}
           onClick={onClose}
           styles={{ display: { xs: "block", md: "none" } }}
@@ -34,13 +34,13 @@ export default function CustomMenu({ isOpen, anchorEl, onClose }) {
         {!user && (
           <>
             <CustomMenuLink
-              text="login"
+              text="Login"
               navigateTo={ROUTES.LOGIN}
               onClick={onClose}
               styles={{ display: { xs: "block", md: "none" } }}
             />
             <CustomMenuLink
-              text="signup"
+              text="Signup"
               navigateTo={ROUTES.SIGNUP}
               onClick={onClose}
               styles={{ display: { xs: "block", md: "none" } }}
@@ -51,12 +51,12 @@ export default function CustomMenu({ isOpen, anchorEl, onClose }) {
         {user && (
           <>
             <CustomMenuLink
-              text="profile"
+              text="Profile"
               navigateTo={ROUTES.USER_PROFILE}
               onClick={onClose}
             />
             <CustomMenuLink
-              text="edit account"
+              text="Edit Account"
               navigateTo={ROUTES.EDIT_USER}
               onClick={onClose}
             />

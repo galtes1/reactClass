@@ -15,11 +15,13 @@ import { getUser } from "../services/localStorageService";
 import ROUTES from "../../routes/routesModel";
 import CustomErrorPage from "../../pages/CustomErrorPage";
 import CustomSpinner from "../../components/CustomSpinner";
+import algoMethods from "../../forms/utils/algoMethods";
 
 export default function CustomProfilePage() {
   const { handleGetUser, error, isLoading } = useUsers();
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
+  const { makeFirstLetterCapital, makeAllLettersCapital } = algoMethods();
 
   useEffect(() => {
     const user = getUser();
@@ -36,26 +38,30 @@ export default function CustomProfilePage() {
   if (isLoading) return <CustomSpinner />;
   if (userData) {
     return (
-      <Box>
-        <Avatar src={userData.image.url} alt={userData.image.alt} />
+      <Box display="flex" alignItems="center" p={2}>
+        <Box mr={4}>
+          <Avatar
+            src={userData.image.url}
+            alt={userData.image.alt}
+            sx={{ width: 250, height: 250 }}
+          />
+        </Box>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Full Name:
+                  Name:
                   <Typography>
-                    {userData.name.first +
+                    {makeFirstLetterCapital(userData.name.first) +
                       " " +
-                      userData.name.middle +
-                      " " +
-                      userData.name.last}
+                      makeFirstLetterCapital(userData.name.last)}
                   </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  userID:<Typography>{userData._id}</Typography>
+                  User ID:<Typography>{userData._id}</Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -70,15 +76,15 @@ export default function CustomProfilePage() {
               </TableRow>
               <TableRow>
                 <TableCell>
-                  address:
+                  Address:
                   <Typography>
-                    {userData.address.street +
+                    {userData.address.houseNumber +
                       " " +
-                      userData.address.houseNumber +
+                      makeFirstLetterCapital(userData.address.street) +
                       ", " +
-                      userData.address.city +
+                      makeFirstLetterCapital(userData.address.city) +
                       ", " +
-                      userData.address.country}
+                      makeAllLettersCapital(userData.address.country)}
                   </Typography>
                 </TableCell>
               </TableRow>

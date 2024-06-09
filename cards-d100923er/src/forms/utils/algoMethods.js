@@ -3,8 +3,18 @@ export default function algoMethods() {
     if (typeof text !== "string") {
       text = String(text);
     }
-    const term = text.toUpperCase().trim();
-    return term.charAt(0).toUpperCase() + term.slice(1).toLowerCase();
+    return text
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
   };
-  return { makeFirstLetterCapital };
+
+  const makeAllLettersCapital = (text) => {
+    if (typeof text !== "string") {
+      text = String(text);
+    }
+    const term = text.toUpperCase().trim();
+    return term.toUpperCase();
+  };
+  return { makeFirstLetterCapital, makeAllLettersCapital };
 }

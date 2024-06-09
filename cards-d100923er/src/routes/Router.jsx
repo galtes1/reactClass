@@ -20,37 +20,42 @@ import CustomEditCardPage from "../cards/pages/CustomEditCardPage";
 import CustomProfilePage from "../users/pages/CustomProfilePage";
 import FavCardsPage from "../cards/pages/FavCardsPage";
 import MyCardsPage from "../cards/pages/MyCardsPage";
+import CustomEditUserPage from "../users/pages/CustomEditUserPage";
 
 export default function Router() {
- return (
-  <Routes>
-   <Route path={ROUTES.ROOT} element={<CustomCardsPage />} />
-   <Route path={ROUTES.CARDS} element={<CustomCardsPage />} />
-   <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
-   <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
-   <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
-   <Route path={ROUTES.CREATE_CARD} element={<CustomAddCardPage />} />
-   <Route path={ROUTES.EDIT_CARD + "/:id"} element={<CustomEditCardPage />} />
-   <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
-   <Route
-    path={ROUTES.CARD_INFO + "/:cardId"}
-    element={<CustomCardDetailsPage />}
-   />
-   <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
-   <Route path={ROUTES.USER_PROFILE} element={<CustomProfilePage />} />
-   <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
-   <Route path={ROUTES.SANDBOX} element={<CustomSandBoxPage />}>
-    <Route path="counter" element={<CustomCounterPage />} />
-    <Route path="lifeCycle" element={<CustomLifeCycle />} />
-    <Route path="countries" element={<CustomCountries />} />
-    <Route path="spinner" element={<CustomSpinner />} />
-    <Route path="form" element={<CustomFormExample />} />
-    <Route path="optimization" element={<CustomParentComponent />} />
-    <Route path="context" element={<ParentComponentPage />} />
-   </Route>
-   <Route path="*" element={<CustomErrorPage />} />
-  </Routes>
- );
+  return (
+    <Routes>
+      <Route path={ROUTES.ROOT} element={<CustomCardsPage />} />
+      <Route path={ROUTES.CARDS} element={<CustomCardsPage />} />
+      <Route path={ROUTES.ABOUT} element={<CustomAboutPage />} />
+      <Route path={ROUTES.LOGIN} element={<CustomLoginPage />} />
+      <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
+      <Route path={ROUTES.CREATE_CARD} element={<CustomAddCardPage />} />
+      <Route
+        path={ROUTES.EDIT_CARD + "/:id"}
+        element={<CustomEditCardPage />}
+      />
+      <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
+      <Route
+        path={ROUTES.CARD_INFO + "/:cardId"}
+        element={<CustomCardDetailsPage />}
+      />
+      <Route path={ROUTES.EDIT_USER} element={<CustomEditUserPage />} />
+      <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
+      <Route path={ROUTES.USER_PROFILE} element={<CustomProfilePage />} />
+      <Route path={ROUTES.SIGNUP} element={<CustomSignupPage />} />
+      <Route path={ROUTES.SANDBOX} element={<CustomSandBoxPage />}>
+        <Route path="counter" element={<CustomCounterPage />} />
+        <Route path="lifeCycle" element={<CustomLifeCycle />} />
+        <Route path="countries" element={<CustomCountries />} />
+        <Route path="spinner" element={<CustomSpinner />} />
+        <Route path="form" element={<CustomFormExample />} />
+        <Route path="optimization" element={<CustomParentComponent />} />
+        <Route path="context" element={<ParentComponentPage />} />
+      </Route>
+      <Route path="*" element={<CustomErrorPage />} />
+    </Routes>
+  );
 
- //maayan
+  //maayan
 }
