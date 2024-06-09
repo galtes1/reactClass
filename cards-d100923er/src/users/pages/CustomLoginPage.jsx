@@ -31,8 +31,8 @@ export default function LoginPage() {
   return (
     <Container>
       <CustomPageHeader
-        title="Welcome to Login page"
-        subtitle="here you can log in"
+        title="Login Page"
+        subtitle="Welcome Back!"
       />
       <Container
         sx={{
