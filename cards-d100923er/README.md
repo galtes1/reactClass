@@ -96,7 +96,8 @@ To get started with this project, clone the repository and install the dependenc
 
 bash
 Copy code
-git clone: https://github.com/MIGELZO/cards-d100923er
+git clone: https://github.com/galtes1/reactClass
+cd car [tab]
 npm install
 After installing the dependencies, you can start the application by running:
 
@@ -109,15 +110,15 @@ This will launch the application on localhost:3000.
 
 ## Admin:
 
-### mosesadmin1@email.com (Password: Moses1234@)
+### admin@gmail.com (Password: Abc!123Abc)
 
 ## Business User:
 
-### daniel@tests3.com (Password: Dd1234567!)
+### m.scott@dunmif.com (Password: Ab12345678@)
 
 ## Regular User:
 
-### daniel@testss.com (Password: daniel@testss.com)
+### j.halpert@dunmif.com (Password: Ab12345678@)
 
 # API documentation:
 
