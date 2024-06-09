@@ -23,6 +23,8 @@ export default function CustomCardsPage() {
  const handleLike = async (cardId) => {
   await handleCardLike(cardId);
  };
+
+ if (user&& ((user.isBusiness===true)||(user.isAdmin===true)))
  return (
   <div>
    <CustomPageHeader title="Cards" subtitle="All Available Cards" />
@@ -35,5 +37,9 @@ export default function CustomCardsPage() {
    />
    <CustomNewCardButton />
   </div>
- );
+   );
+   else{
+
+    
+   }
 }
