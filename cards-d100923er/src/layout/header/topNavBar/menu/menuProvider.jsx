@@ -18,6 +18,7 @@ export const MenuProvider = ({ children }) => {
   setAnchor(anchorRef.current);
  }, []);
 
+
  useEffect(() => {
   setIsOpen(false);
  }, [screenSize]);
