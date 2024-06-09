@@ -4,10 +4,12 @@ import CustomPageHeader from "../../components/CustomPageHeader";
 import CustomCardsFeedback from "../components/CustomCardsFeedback";
 import useCards from "../hooks/useCards";
 import CustomNewCardButton from "../components/CustomNewCardButton";
+import { useUser } from "../../users/providers/UserProvider";
 
 export default function CustomCardsPage() {
  const { value, getAllCards, handleCardDelete, handleCardLike } = useCards();
  const { error, isLoading, filteredCards } = value;
+ const {user} = useUser()
 
  useEffect(() => {
   getAllCards();

@@ -41,6 +41,11 @@ export default function CardActionBar({
   await handleLike(cardId);
   setIsLiked((prev) => !prev);
  };
+ 
+ const handlePhone = (cardId)=>{
+    alert("please call")
+    navigate(ROUTES.CARD_INFO+"/"+cardId)
+ }
 
  return (
   <>
@@ -59,7 +64,7 @@ export default function CardActionBar({
      </Box>
     ) : null}
     <Box>
-     <IconButton>
+     <IconButton onClick={()=>handlePhone(cardId)}>
       <CallIcon />
      </IconButton>
      <IconButton
