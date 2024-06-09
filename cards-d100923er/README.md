@@ -68,3 +68,59 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Business Cards Project (React)
+Welcome to the Business Cards Project! This application is designed to create, manage, and like business cards in a user-friendly and efficient manner. Built with React and utilizing a variety of modern web technologies, this project offers a seamless experience for both personal and business use.
+
+Features
+Card Creation and Management
+Users can create their own business cards with customizable fields such as title, description, contact information, and images.
+Manage created cards with options for editing and deleting.
+Favorite Cards
+Users can mark cards as favorites for easy access.
+User Authentication
+Secure login and signup functionality for user management.
+Responsive Design
+Ensures a great user experience across various devices and screen sizes.
+Admin Panel
+Administrators have access to manage users and cards, providing robust control over the application.
+Technologies Used
+React.js
+React Router for navigation
+Material-UI for UI components
+Styled Components for styling
+Joi for validation
+
+Getting Started
+To get started with this project, clone the repository and install the dependencies:
+
+bash
+Copy code
+git clone: https://github.com/MIGELZO/cards-d100923er
+npm install
+After installing the dependencies, you can start the application by running:
+
+bash
+Copy code
+npm start
+This will launch the application on localhost:3000.
+
+# Users
+
+## Admin:
+
+### mosesadmin1@email.com (Password: Moses1234@)
+
+## Business User:
+
+### daniel@tests3.com (Password: Dd1234567!)
+
+## Regular User:
+
+### daniel@testss.com (Password: daniel@testss.com)
+
+# API documentation:
+
+## CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
+
+## USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL

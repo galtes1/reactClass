@@ -22,6 +22,12 @@ export default function LoginPage() {
   const { user } = useUser();
   if (user) return <Navigate to={ROUTES.ROOT} replace />;
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit();
+    }
+  };
+
   return (
     <Container>
       <CustomPageHeader
@@ -51,6 +57,7 @@ export default function LoginPage() {
             error={errors.email}
             onChange={handleChange}
             data={data}
+            onKeyPress={handleKeyPress}
           />
           <CustomInput
             label="password"
@@ -59,6 +66,7 @@ export default function LoginPage() {
             error={errors.password}
             onChange={handleChange}
             data={data}
+            onKeyPress={handleKeyPress}
           />
           <Grid item xs={12}>
             <Button
